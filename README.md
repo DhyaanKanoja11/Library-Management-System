@@ -1,145 +1,120 @@
-# Library-Management-System
-A Python &amp; MySQL solution for managing books, members, and checkouts in an library. Features role-based access (Admin/Librarian/Member), inventory control, and circulation tracking. Ideal for small libraries seeking organized digital management. Clean CLI (CommandLine Interface) interface with tabulated data display.
-This robust Library Management System represents a complete digital transformation solution for modern libraries, leveraging Python's programming efficiency and MySQL's database reliability.
+# Library Management System  
+**Version 2.2.0**  
 
-## **Core System Features**
+A robust, role-based library management system for tracking books, members, and loans. Built with Python and MySQL, featuring enhanced security, reporting, and usability improvements over previous versions.  
 
-### **1. User Management Module**
-- **Role-Based Access Hierarchy**:
-  - *Administrators*: Full system control including user management and database configuration
-  - *Librarians*: Daily operational access for circulation and inventory tasks
-  - *Members*: Self-service portal for personal accounts and book searches
+---
 
-- **Security Framework**:
-  - Individual password-protected accounts
-  - Session-based authentication
-  - Privilege escalation prevention
+## 🚀 **Key Features**  
+- **Role-Based Access Control**  
+  - **Admin**: Full system control (users, books, reports)  
+  - **Librarian**: Daily operations (checkouts, returns, overdue tracking)  
+  - **Member**: Self-service portal (view loans, search books)  
 
-### **2. Inventory Management**
-- **Complete Bibliographic Control**:
-  - ISBN validation and duplicate prevention
-  - Multi-field search capabilities (title/author/ISBN)
-  - Dynamic quantity adjustment with threshold alerts
+- **Enhanced Security**  
+  - SHA-256 password hashing  
+  - Input validation for emails, ISBNs, and user roles  
+  - Session-based authentication  
 
-- **Collection Analytics**:
-  - Usage statistics by title/category
-  - Circulation frequency reports
-  - Inventory aging analysis
+- **Comprehensive Reporting**  
+  - Circulation summaries (active loans, overdue books)  
+  - Inventory analytics (books by genre, recent additions)  
+  - Member activity tracking (most active users, overdue lists)  
 
-### **3. Circulation System**
-- **Transaction Processing**:
-  - One-click check-in/check-out
-  - Automatic due date calculation
-  - Real-time availability indicators
+- **Improved Database Management**  
+  - Automatic database/table initialization  
+  - Foreign key constraints for data integrity  
+  - Indexes for faster queries  
 
-- **Member Services**:
-  - Borrowing history tracking
-  - Account activity monitoring
-  - Personalized recommendation engine
+- **User Experience**  
+  - Clean CLI interface with tabulated data  
+  - Intuitive menu navigation  
+  - Contextual error messages  
 
-## **Technical Architecture**
+---
 
-### **Backend Components**
-- **Application Layer**: Python 3.10+ using procedural and object-oriented paradigms
-- **Database Layer**: MySQL 8.0 with InnoDB engine for ACID compliance
-- **Interface Layer**: CLI with tabulated data presentation
+## ⚙️ **Version 2.2.0 Changes (Upgrade from 2.1.0)**  
 
-### **Data Model**
-```plaintext
-Books (book_id, ISBN, title, author, quantity)
-Members (mem_id, name, join_date, contact, password)
-Transactions (transaction_id, book_id, mem_id, issue_date, return_date)
-```
+| Feature                | v2.1.0                  | v2.2.0 Improvements                                                                 |  
+|------------------------|-------------------------|-------------------------------------------------------------------------------------|  
+| **Architecture**       | Procedural code         | **Class-based structure** for better modularity and maintainability                |  
+| **Security**           | Plaintext passwords     | **SHA-256 hashing** + improved input validation                                     |  
+| **Book Management**    | Basic metadata          | **Genre, location, and publication year** tracking                                  |  
+| **Loan System**        | Simple checkouts        | **Overdue tracking** with statuses (`checked_out`, `returned`, `overdue`)           |  
+| **Error Handling**     | Limited                 | **Transaction rollbacks** + detailed error logging                                  |  
+| **User Interface**     | Basic menus             | **Tabulated displays** + consistent headers + streamlined workflows                 |  
+| **Reports**            | None                    | **6+ report types** (circulation, inventory, member activity)                       |  
 
-### **Performance Benchmarks**
-- Processes 50+ simultaneous transactions
-- Handles catalogs exceeding 10,000 titles
-- Sub-second response time for most queries
+---
 
-## **Implementation Guide**
+## 🛠️ **Installation**  
 
-### **System Requirements**
-- **Hardware**:
-  - 2GHz dual-core processor minimum
-  - 4GB RAM (8GB recommended for large collections)
-  - 500MB storage space
+### Prerequisites  
+- Python 3.10+  
+- MySQL Server 8.0+  
+- `pip` package manager  
 
-- **Software**:
-  - MySQL Server 8.0+
-  - Python 3.10+
-  - Supported on Windows/Linux/macOS
+### Steps  
+1. **Clone the Repository**  
+   ```bash  
+   git clone https://github.com/your-repo/library-management.git  
+   cd library-management  
+   ```  
 
-### **Installation Process**
-1. **Database Setup**:
-   ```sql
-   CREATE DATABASE library_management;
-   GRANT ALL PRIVILEGES ON library_management.* TO 'libadmin'@'localhost';
-   ```
+2. **Install Dependencies**  
+   ```bash  
+   pip install mysql-connector-python tabulate  
+   ```  
 
-2. **Environment Configuration**:
-   ```bash
-   python -m venv libenv
-   source libenv/bin/activate  # Linux/macOS
-   libenv\Scripts\activate     # Windows
-   ```
+3. **Database Setup**  
+   - MySQL will auto-create the `library_management` database on first run  
+   - Default admin credentials:  
+     ```  
+     Username: admin  
+     Password: admin123  
+     ```  
 
-3. **Dependency Installation**:
-   ```bash
-   pip install mysql-connector-python==8.1.0 tabulate==0.9.0
-   ```
+4. **Run the System**  
+   ```bash  
+   python main.py  
+   ```  
 
-4. **System Initialization**:
-   ```bash
-   python library_management.py
-   ```
+---
 
-## **Operational Advantages**
+## 📖 **Usage Guide**  
 
-### **Administrative Benefits**
-- **Efficiency Gains**:
-  - 70% reduction in manual data entry
-  - 60% faster inventory audits
-  - 80% improvement in report generation
+### For Admins  
+1. Manage users (add, suspend, update roles)  
+2. Add/remove books, update quantities  
+3. Generate reports (circulation, inventory)  
 
-- **Resource Optimization**:
-  - Dynamic acquisition planning
-  - Identifies outdated or unused materials for removal
-  - Space utilization metrics
+### For Librarians  
+1. Check out/return books  
+2. View active loans and overdue items  
+3. Search books by title/author/genre  
 
-### **User Experience Improvements**
-- **For Staff**:
-  - Unified dashboard for all operations
-  - Automated overdue notifications
-  - Batch processing capabilities
+### For Members  
+1. View personal loan history  
+2. Search available books  
+3. Update passwords  
 
-- **For Patrons**:
-  - Mobile-friendly access
-  - Personalized reading history
-  - Reservation system
+---
 
-## **Security and Compliance**
-- **Data Protection**:
-  - Password hashing
-  - Session timeouts
-  - Failed attempt lockouts
+## 🛡️ **Reliability & Continuous Operation**  
+- **Fault Tolerance**: Automatic transaction rollbacks on errors prevent data corruption.  
+- **Persistent Connections**: Stable MySQL connection pooling ensures minimal downtime.  
+- **Uninterrupted Service**: Designed for 24/7 operation with no need for frequent restarts.  
 
+---
 
-## **Future Development Roadmap**
-- Web interface migration
-- RFID integration
-- Machine learning for collection development
-- Mobile application development
+## 📜 **License**  
+MIT License | [Full License Text](LICENSE)  
 
-## **Support and Maintenance**
-- Detailed error logging
-- Automated backup system
-- Upgrade migration scripts
+---
 
-## **Conclusion**
-This system represents a significant leap forward in library automation, combining technical robustness with operational practicality. Its modular design allows for future expansion while current features address all fundamental library workflows with precision and reliability.
+## 📧 **Support**  
+For issues or feature requests, contact:  
+- **Your Name**  
+- **Email**: dhyaandk11@gmail.com 
 
-*"Reimagining library science through technological innovation"*  
-
-**License**: MIT  
-**Current Version**: 2.1.0  
-**Supported Until**: December 2027  
+---
